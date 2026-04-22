@@ -26,17 +26,17 @@ function sendToFlutter(code) {
     console.log("///// console /////");
     console.log("result:", result);
     console.log("status:", result.status);
-    console.log("result:", result.result);
+    console.log("data:", result.data);
 
-    if (result.result.barcode != null) {
+    if (result.data.barcode != null) {
       console.log("barcode", result.data.barcode);
     }
     
-    if (result.result.latitude != null) {
+    if (result.data.latitude != null) {
       console.log("latitude", result.data.latitude);
     }
     
-    if (result.result.longitude != null) {
+    if (result.data.longitude != null) {
       console.log("longitude", result.data.longitude);
     }
     
