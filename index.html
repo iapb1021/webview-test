@@ -24,15 +24,9 @@ function sendToFlutter(code) {
   }).then(function(result) {
     // 앱에서 반환한 응답을 여기서 처리할 수 있습니다.
     console.log("앱으로부터의 응답:", result);
-    console.log("앱으로부터의 응답:", result.status);
+    fromFlutter(result + ', ' + result.status);
   });
 }
-
-// Flutter → Web 호출 테스트용
-function receiveFromFlutter() {
-  document.getElementById("result").innerText = "Flutter가 이 함수를 호출했어요!";
-}
-
 // Flutter에서 호출할 함수
 function fromFlutter(message) {
   document.getElementById("result").innerText = message;
