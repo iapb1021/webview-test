@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WebView Bridge Test</title>
+</head>
+<body>
 
+<h2>WebView Bridge Test Page</h2>
+
+<button onclick="sendToFlutter()">Flutter로 메시지 보내기</button>
+<button onclick="receiveFromFlutter()">Flutter에서 호출 테스트</button>
+
+<p id="result"></p>
+
+<script>
+function sendToFlutter() {
+  // Android (JavascriptChannel)
+  if (window.TestChannel) {
+    TestChannel.postMessage('Hello from Web');
+  }
+
+  // iOS / InAppWebView
+  if (window.flutter_inappwebview) {
+    window.flutter_inappwebview.callHandler('test', 'Hello from Web');
+  }
+}
+
+// Flutter → Web 호출 테스트용
+function receiveFromFlutter() {
+  document.getElementById("result").innerText = "Flutter가 이 함수를 호출했어요!";
+}
+
+// Flutter에서 호출할 함수
+function fromFlutter(message) {
+  document.getElementById("result").innerText = message;
+}
+</script>
+
+</body>
+</html>
