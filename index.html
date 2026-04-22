@@ -22,8 +22,25 @@ function sendToFlutter(code) {
     event: code,
     timestamp: new Date().getTime()
   }).then(function(result) {
-    // 앱에서 반환한 응답을 여기서 처리할 수 있습니다.
-    console.log("앱으로부터의 응답:", result);
+    // 앱에서 반환한 응답을 여기서 처리할 수 있습니다
+    console.log("///// console /////");
+    console.log("result:", result);
+    console.log("status:", result.status);
+    console.log("data:", result.data);
+
+    if (result.data.barcode != null) {
+      console.log("barcode", result.data.barcode);
+    }
+    
+    if (result.data.latitude != null) {
+      console.log("latitude", result.data.latitude);
+    }
+    
+    if (result.data.longitude != null) {
+      console.log("longitude", result.data.longitude);
+    }
+    
+    console.log("--------------------");
   });
 }
 
