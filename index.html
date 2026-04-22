@@ -8,22 +8,21 @@
 
 <h2>WebView Bridge Test Page</h2>
 
-<button onclick="sendToFlutter()">Flutter로 메시지 보내기</button>
-<button onclick="receiveFromFlutter()">Flutter에서 호출 테스트</button>
+<button onclick="sendToFlutter('barcode')">Flutter로 바코드 스캔 요청</button>
+<button onclick="sendToFlutter('location')">Flutter로 위치 정보 요청</button>
 
 <p id="result"></p>
 
 <script>
-function sendToFlutter() {
-  // Android (JavascriptChannel)
-  if (window.TestChannel) {
-    TestChannel.postMessage('Hello from Web');
-  }
-
-  // iOS / InAppWebView
-  if (window.flutter_inappwebview) {
-    window.flutter_inappwebview.callHandler('test', 'Hello from Web');
-  }
+function sendToFlutter(code) {
+  window.flutter_inappwebview.callHandler('eventToApp', {
+    event: code,
+    timestamp: new Date().getTime()
+  }).then(function(result) {
+    // 앱에서 반환한 응답을 여기서 처리할 수 있습니다.
+    console.log("앱으로부터의 응답:", result);
+    console.log("앱으로부터의 응답:", result.status);
+  });
 }
 
 // Flutter → Web 호출 테스트용
